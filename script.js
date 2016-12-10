@@ -1,4 +1,9 @@
+/**
+ * @author Kaleen
+ */
+
 function onEdit() {
+
   // Copied from: https://productforums.google.com/d/topic/docs/ehoCZjFPBao/discussion
   var sheetNameToWatch = "New";
   var columnNumberToWatch = 12; // column A = 1, B = 2, etc.
@@ -20,19 +25,6 @@ function onEdit() {
   // Do sort and archive
   sortAndArchive();
 }
-
-function myFunction() {
-  var s = SpreadsheetApp.getActiveSheet();
-  var values = s.getDataRange().getValues();
-  nextLine: for( var i = values.length-1; i >=0; i-- ) {
-    for( var j = 0; j < values[i].length; j++ )
-      if( values[i][j] != "" )
-        continue nextLine;
-    s.deleteRow(i+1);
-  }
-  //I iterate it backwards on purpose, so I do not have to calculate the indexes after a removal
-}												
-
 
 function sortAndArchive() {
   
