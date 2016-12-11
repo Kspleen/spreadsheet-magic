@@ -28,6 +28,33 @@ function sortAndArchive() {
     // Assume that we didn't archive anything yet.
     var archivedSomething = false;
     
+function sortAndArchive() {
+  
+  // Important parameters
+  var dateColumn = 8;
+  var dateIndex = dateColumn - 1;
+  var olderInTop = true;
+ 
+  // Sheets.
+  var app = SpreadsheetApp.getActiveSpreadsheet();
+  var upcomming = app.getSheetByName("Upcoming");
+  var archive = app.getSheetByName("Archive");
+ 
+  // Sort range A2:T by dateColumn.
+  var allColumns = upcomming.getRange("A2:T");
+  allColumns.sort({column: dateColumn, ascending: olderInTop});
+  
+  // Archive old row.
+  var today = new Date();
+  today.setHours(0,0,0,0);
+  
+  // Run this foreveer and exit when script didn't archive anything.
+  while(true) {
+    
+    // Assume that we didn't archive anything yet.
+    var archivedSomething = false;
+    var rows = allColumns.getValues();
+    
     // Scan every row in range.
     for (var rowI = 0; rowI < rows.length; rowI++) {
       
@@ -55,9 +82,8 @@ function sortAndArchive() {
     }
 
   }
-
+  
 }
-
 
 function onEdit() {
 
