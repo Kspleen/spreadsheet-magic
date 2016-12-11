@@ -2,30 +2,6 @@
  * @author Kaleen
  */
 
-function onEdit() {
-
-  // Copied from: https://productforums.google.com/d/topic/docs/ehoCZjFPBao/discussion
-  var sheetNameToWatch = "New";
-  var columnNumberToWatch = 12; // column A = 1, B = 2, etc.
-  var valueToWatch = "x";
-  var targetSheetToMoveTheRowTo = "Upcoming";
-  var rangeToSortOnSheetOnTargetSheet = "A2:T";
-  
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = SpreadsheetApp.getActiveSheet();
-  var range = sheet.getActiveCell();
-  
-  if (sheet.getName() == sheetNameToWatch && range.getColumn() == columnNumberToWatch && range.getValue() == valueToWatch) {
-    var targetSheet = ss.getSheetByName(targetSheetToMoveTheRowTo);
-    var targetRange = targetSheet.getRange(targetSheet.getLastRow() + 1, 1);
-    sheet.getRange(range.getRow(), 1, 1, sheet.getLastColumn()).moveTo(targetRange);
-    sheet.deleteRow(range.getRow());
-  }
-  
-  // Do sort and archive
-  sortAndArchive();
-}
-
 function sortAndArchive() {
   
   // Important parameters
@@ -81,3 +57,29 @@ function sortAndArchive() {
   }
 
 }
+
+
+function onEdit() {
+
+  // Copied from: https://productforums.google.com/d/topic/docs/ehoCZjFPBao/discussion
+  var sheetNameToWatch = "New";
+  var columnNumberToWatch = 12; // column A = 1, B = 2, etc.
+  var valueToWatch = "x";
+  var targetSheetToMoveTheRowTo = "Upcoming";
+  var rangeToSortOnSheetOnTargetSheet = "A2:T";
+  
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var range = sheet.getActiveCell();
+  
+  if (sheet.getName() == sheetNameToWatch && range.getColumn() == columnNumberToWatch && range.getValue() == valueToWatch) {
+    var targetSheet = ss.getSheetByName(targetSheetToMoveTheRowTo);
+    var targetRange = targetSheet.getRange(targetSheet.getLastRow() + 1, 1);
+    sheet.getRange(range.getRow(), 1, 1, sheet.getLastColumn()).moveTo(targetRange);
+    sheet.deleteRow(range.getRow());
+  }
+  
+  // Do sort and archive
+  sortAndArchive();
+}
+
